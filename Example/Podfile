@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'EUImagePicker_Example' do
+  pod 'EUImagePicker', :path => '../'
+
+  target 'EUImagePicker_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
