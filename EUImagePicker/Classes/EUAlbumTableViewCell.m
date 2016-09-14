@@ -10,6 +10,10 @@
 #import "AlbumCellView.h"
 #import "AlbumModel.h"
 #import "PhotoManager.h"
+#import "Masonry.h"
+#import "GlobalDefine.h"
+
+static const CGFloat cellHeight = 150.0f;
 
 @interface EUAlbumTableViewCell()
 
@@ -19,10 +23,15 @@
 
 @implementation EUAlbumTableViewCell
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self.contentView addSubview:self.cellView];
+        [self.cellView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.top.equalTo(self.contentView);
+            make.width.mas_equalTo(@(SCREEN_WIDTH));
+            make.height.mas_equalTo(@(cellHeight));
+        }];
     }
     return self;
 }

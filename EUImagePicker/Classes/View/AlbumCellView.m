@@ -52,11 +52,13 @@ static const CGFloat arrowRightPadding = 15.0/2.0f;
         make.left.equalTo(self.albumCover.mas_right).with.offset(labelPadding);
         make.top.height.equalTo(self);
         make.right.equalTo(self.arrowView.mas_left);
+        make.centerY.equalTo(self);
     }];
     
     [self.arrowView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self).with.offset(-arrowRightPadding);
         make.top.equalTo(self);
+        make.centerY.equalTo(self);
     }];
 }
 
@@ -71,6 +73,7 @@ static const CGFloat arrowRightPadding = 15.0/2.0f;
     if (_albumName == nil) {
         _albumName = [[UILabel alloc] init];
         _albumName.text = self.nameString;
+        _albumName.textAlignment = NSTextAlignmentCenter;
     }
     return _albumName;
 }
