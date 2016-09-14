@@ -10,4 +10,10 @@
 
 @interface AlbumCellView : UIView
 
+@property (nonatomic, strong) UIImage *coverImage;
+@property (nonatomic, copy) NSString *nameString;
+
+- (instancetype)initCellWithAlbumCover:(UIImage *)coverImage
+                             albumName:(NSString *)nameString;
+
 @end

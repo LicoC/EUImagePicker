@@ -18,8 +18,6 @@ static const CGFloat arrowRightPadding = 15.0/2.0f;
 @property (nonatomic, strong) UIImageView *albumCover;
 @property (nonatomic, strong) UILabel *albumName;
 @property (nonatomic, strong) UIImageView *arrowView;
-@property (nonatomic, strong) UIImage *coverImage;
-@property (nonatomic, copy) NSString *nameString;
 
 @end
 
@@ -80,7 +78,19 @@ static const CGFloat arrowRightPadding = 15.0/2.0f;
 - (UIImageView *)arrowView {
     if (_arrowView == nil) {
         _arrowView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"picture_list_next_normal"]];
+        [_arrowView setHighlightedImage:[UIImage imageNamed:@"picture_list_next_press"]];
     }
     return _arrowView;
+}
+
+#pragma mark - public method
+- (void)setCoverImage:(UIImage *)coverImage {
+    self.coverImage = coverImage;
+    [self.albumCover setImage:coverImage];
+}
+
+- (void)setNameString:(NSString *)nameString {
+    self.nameString = nameString;
+    [self.albumName setText:nameString];
 }
 @end

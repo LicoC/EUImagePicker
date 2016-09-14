@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class AlbumModel;
+
 @interface EUAlbumTabelViewCell : UITableViewCell
+
+@property (nonatomic, strong) AlbumModel *album;
 
 @end
