@@ -41,7 +41,7 @@
 }
 
 - (void)setAlbum:(AlbumModel *)album {
-    self.album = album;
+    _album = album;
     
     //get album info from album and then update cellView
     [[PhotoManager sharedPhotoManager] getCoverImageWithAlbumModel:self.album completion:^(UIImage *cover) {
@@ -50,6 +50,8 @@
         [self.cellView setNameString:self.album.albumName];
         
     }];
+    
+    [self.cellView setNameString:self.album.albumName];
 }
 
 @end

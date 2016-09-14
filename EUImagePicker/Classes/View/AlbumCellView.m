@@ -85,12 +85,12 @@ static const CGFloat arrowRightPadding = 15.0/2.0f;
 
 #pragma mark - public method
 - (void)setCoverImage:(UIImage *)coverImage {
-    self.coverImage = coverImage;
+    _coverImage = coverImage;
     [self.albumCover setImage:coverImage];
 }
 
 - (void)setNameString:(NSString *)nameString {
-    self.nameString = nameString;
+    _nameString = nameString;
     [self.albumName setText:nameString];
 }
 @end
