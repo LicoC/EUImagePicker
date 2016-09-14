@@ -6,18 +6,18 @@
 //
 //
 
-#import "EUAlbumTabelViewCell.h"
+#import "EUAlbumTableViewCell.h"
 #import "AlbumCellView.h"
 #import "AlbumModel.h"
 #import "PhotoManager.h"
 
-@interface EUAlbumTabelViewCell()
+@interface EUAlbumTableViewCell()
 
 @property (nonatomic, strong) AlbumCellView *cellView;
 
 @end
 
-@implementation EUAlbumTabelViewCell
+@implementation EUAlbumTableViewCell
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];

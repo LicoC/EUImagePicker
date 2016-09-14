@@ -10,7 +10,7 @@
 
 @class AlbumModel;
 
-@interface EUAlbumTabelViewCell : UITableViewCell
+@interface EUAlbumTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) AlbumModel *album;
 

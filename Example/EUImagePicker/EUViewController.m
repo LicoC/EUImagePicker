@@ -7,8 +7,11 @@
 //
 
 #import "EUViewController.h"
+#import "EUImagePickerViewController.h"
 
 @interface EUViewController ()
+
+@property (nonatomic, strong) UIButton *showImage;
 
 @end
 
@@ -18,6 +21,22 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    CGFloat x = CGRectGetWidth(self.view.bounds)/3;
+    CGFloat y = CGRectGetHeight(self.view.bounds)/2;
+    
+    _showImage = [[UIButton alloc] initWithFrame:CGRectMake(x, y, 100, 100)];
+    [_showImage setTitle:@"显示照片" forState:UIControlStateNormal];
+    [_showImage setBackgroundColor:[UIColor blackColor]];
+    [_showImage addTarget:self action:@selector(showImageClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:self.showImage];
+}
+
+- (void)showImageClick:(id)sender {
+    EUImagePickerViewController *vc = [[EUImagePickerViewController alloc] init];
+    
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning

@@ -26,4 +26,15 @@
                          completion:(void(^)(UIImage *cover))completion {
     
 }
+
+- (void)getAllAlbums:(void(^)(NSArray<AlbumModel *> *models))completion {
+    NSMutableArray *albumArray = [[NSMutableArray alloc] init];
+    PHFetchOptions *option = [[PHFetchOptions alloc] init];
+    option.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
+    
+}
+
+- (void)getCameraRollAlbum:(void(^)(AlbumModel *model))completion {
+    
+}
 @end
