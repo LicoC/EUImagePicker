@@ -1,5 +1,5 @@
 //
-//  PhotoManager.h
+//  EUPhotoManager.h
 //  Pods
 //
 //  Created by zhangjie on 16/9/14.
@@ -11,7 +11,7 @@
 #import <Photos/Photos.h>
 #import "AlbumModel.h"
 
-@interface PhotoManager : NSObject
+@interface EUPhotoManager : NSObject
 
 + (instancetype)sharedPhotoManager;
 
@@ -19,5 +19,5 @@
 
 - (void)getCameraRollAlbum:(void(^)(AlbumModel *model))completion;
 
-- (void)getCoverImageWithAlbumModel:(AlbumModel *)album completion:(void(^)(UIImage *cover))completion;
+- (void)getCoverImageWithAlbumModel:(AlbumModel *)album photoSize:(CGSize)imageSize completion:(void(^)(UIImage *cover))completion;
 @end

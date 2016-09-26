@@ -36,7 +36,9 @@
 - (void)showImageClick:(id)sender {
     EUImagePickerViewController *vc = [[EUImagePickerViewController alloc] init];
     
-    [self presentViewController:vc animated:YES completion:nil];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning

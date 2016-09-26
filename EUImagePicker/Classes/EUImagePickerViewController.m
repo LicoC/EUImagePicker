@@ -9,7 +9,8 @@
 #import "EUImagePickerViewController.h"
 #import "EUAlbumTableViewCell.h"
 #import "AlbumModel.h"
-#import "PhotoManager.h"
+#import "EUPhotoManager.h"
+#import "EUImagePickerDetailViewController.h"
 
 static NSString *cellIdentifier = @"EUAlbumTableViewCell";
 
@@ -31,12 +32,19 @@ static NSString *cellIdentifier = @"EUAlbumTableViewCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view addSubview:self.albumTableView];
+    [self customNavigationBar];
     
     [self loadPhotoAlbums];
 }
 
+- (void)customNavigationBar {
+    self.navigationItem.title = @"相册列表";
+    self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancel)];
+}
+
 - (void)loadPhotoAlbums {
-    [[PhotoManager sharedPhotoManager] getAllAlbums:^(NSArray<AlbumModel *> *models) {
+    [[EUPhotoManager sharedPhotoManager] getAllAlbums:^(NSArray<AlbumModel *> *models) {
         [self.albumList addObjectsFromArray:models];
     }];
 }
@@ -49,6 +57,7 @@ static NSString *cellIdentifier = @"EUAlbumTableViewCell";
         _albumTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _albumTableView.delegate = self;
         _albumTableView.dataSource = self;
+        _albumTableView.rowHeight = 185/2.0f;
         
         [_albumTableView registerClass:[EUAlbumTableViewCell class] forCellReuseIdentifier:cellIdentifier];
     }
@@ -84,5 +93,15 @@ static NSString *cellIdentifier = @"EUAlbumTableViewCell";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - action
+- (void)cancel {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - public
+- (void)showCameraRollAlbum {
+    
 }
 @end

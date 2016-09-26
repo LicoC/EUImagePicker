@@ -10,4 +10,6 @@
 
 @interface EUImagePickerViewController : UIViewController
 
+- (void)showCameraRollAlbum;
+
 @end

@@ -10,8 +10,10 @@
 #import "Masonry.h"
 
 static const CGFloat coverWidth = 150.0/2.0f;
+static const CGFloat coverHeight = 180.0/2.0f;
 static const CGFloat labelPadding = 12.0f;
 static const CGFloat arrowRightPadding = 15.0/2.0f;
+static const CGFloat imagePadding = 5/2.0;
 
 @interface AlbumCellView ()
 
@@ -39,38 +41,44 @@ static const CGFloat arrowRightPadding = 15.0/2.0f;
 - (void)customInit {
     [self addSubview:self.albumCover];
     [self addSubview:self.albumName];
-    [self addSubview:self.arrowView];
+//    [self addSubview:self.arrowView];
 }
 
 - (void)layout {
     [self.albumCover mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.equalTo(self);
-        make.size.mas_equalTo(CGSizeMake(coverWidth, coverWidth));
+        make.left.equalTo(self).with.offset(imagePadding);
+        make.top.equalTo(self).with.offset(imagePadding);
+        make.bottom.equalTo(self).with.offset(-imagePadding);
+        make.width.mas_equalTo(coverWidth);
     }];
     
     [self.albumName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.albumCover.mas_right).with.offset(labelPadding);
-        make.top.height.equalTo(self);
-        make.right.equalTo(self.arrowView.mas_left);
-        make.centerY.equalTo(self);
+        make.top.height.equalTo(self.albumCover);
     }];
     
-    [self.arrowView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self).with.offset(-arrowRightPadding);
-        make.top.equalTo(self);
-        make.centerY.equalTo(self);
-    }];
+//    [self.arrowView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.equalTo(self).with.offset(-arrowRightPadding);
+//        make.top.equalTo(self);
+//        make.centerY.equalTo(self);
+//    }];
 }
 
 - (UIImageView *)albumCover {
     if (_albumCover == nil) {
-        _albumCover = [[UIImageView alloc] initWithImage:self.coverImage];
+        CGRect frame = CGRectMake(imagePadding, imagePadding, coverWidth, coverHeight);
+        _albumCover = [[UIImageView alloc] initWithFrame:frame];
+        _albumCover.contentMode = UIViewContentModeScaleAspectFill;
+        _albumCover.clipsToBounds = YES;
     }
     return _albumCover;
 }
 
 - (UILabel *)albumName {
     if (_albumName == nil) {
+        CGFloat x = imagePadding + coverWidth + labelPadding;
+//        CGRect frame = CGRectMake(leftPadding, , <#CGFloat width#>, <#CGFloat height#>)
+//        _albumName = [[UILabel alloc] initWithFrame:];
         _albumName = [[UILabel alloc] init];
         _albumName.text = self.nameString;
         _albumName.textAlignment = NSTextAlignmentCenter;

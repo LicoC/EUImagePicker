@@ -1,21 +1,21 @@
 //
-//  PhotoManager.m
+//  EUPhotoManager.m
 //  Pods
 //
 //  Created by zhangjie on 16/9/14.
 //
 //
 
-#import "PhotoManager.h"
+#import "EUPhotoManager.h"
 #import "GlobalDefine.h"
 
 static const CGFloat kios8 = 8.0;
 static const CGFloat kios9 = 9.0;
 
-@implementation PhotoManager
+@implementation EUPhotoManager
 
 + (instancetype)sharedPhotoManager {
-    static PhotoManager *manager;
+    static EUPhotoManager *manager;
     static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{
@@ -26,9 +26,18 @@ static const CGFloat kios9 = 9.0;
     return manager;
 }
 
-- (void)getCoverImageWithAlbumModel:(AlbumModel *)album
+- (PHImageRequestID)getCoverImageWithAlbumModel:(AlbumModel *)album
+                                      photoSize:(CGSize)imageSize
                          completion:(void(^)(UIImage *cover))completion {
-    
+    PHAsset *lastAsset = [album.albumResult lastObject];
+    PHImageRequestID imageRequestID = [[PHImageManager defaultManager] requestImageForAsset:lastAsset targetSize:imageSize contentMode:PHImageContentModeAspectFill options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        BOOL downloadFinined = (![[info objectForKey:PHImageCancelledKey] boolValue] && ![info objectForKey:PHImageErrorKey]);
+        if (downloadFinined && result) {
+            if (completion)
+                completion(result);
+        }
+    }];
+    return imageRequestID;
 }
 
 - (void)getAllAlbums:(void(^)(NSArray<AlbumModel *> *models))completion {

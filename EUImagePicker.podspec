@@ -31,7 +31,7 @@ TODO: Add long description of the pod here.
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'EUImagePicker/Classes/**/*'
-  
+  s.prefix_header_file = 'EUImagePicker/Classes/PrefixHeader.pch'
   # s.resource_bundles = {
   #   'EUImagePicker' => ['EUImagePicker/Assets/*.png']
   # }
